@@ -1,4 +1,4 @@
-#include "timer.h"
+#include "dtimer.h"
 
 #include <stdio.h>
 
@@ -14,11 +14,18 @@ int main( int argc, char** argv )
 
 	res   = 0xFFFFFFFFFFFFFFFFULL;
 	freq  = timer_ticks_per_second();
-	start = timer_current();
+	start = timer_current_in_ticks();
+	tick_t start2 = timer_current_in_ticks();
+  	tick_t start3 = timer_system_in_millisecond();
+	tick_t  x=timer_system_in_microsecond();
+	double l1=timer_elapsed_from_lastCall()*1e9;
+	double l2=timer_elapsed_from_lastCall()*1e9;
+  	double l3=timer_elapsed_from_lastCall()*1e9;
 
-	while( 1 )
+
+  while( 1 )
 	{
-		time = timer_current();
+		time = timer_current_in_ticks();
 		do {
 			tick = timer_elapsed_ticks( time );
 		} while( !tick );
